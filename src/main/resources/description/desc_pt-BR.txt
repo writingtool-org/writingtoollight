@@ -1,0 +1,2 @@
+WritingToolLight, seu assistente de escrita.
+Baseado no LanguageTool (verificador de gramática, estilo e ortografia para mais de 25 idiomas).

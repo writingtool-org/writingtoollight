@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.writingtool</groupId>
+    <version>${revision}</version>
+
+    <artifactId>writingtoollight</artifactId>
+    <packaging>jar</packaging>
+    <name>WritingToolLight</name>
+
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License</name>
+            <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <repositories>
+        <!-- repository for snapshot -->
+<!--        <repository>
+            <id>repo.languagetool.org</id>
+            <url>https://repo.languagetool.org/artifactory/languagetool-os-snapshot/</url>
+	        <snapshots>
+	            <enabled>true</enabled>
+	            <updatePolicy>daily</updatePolicy>
+	        </snapshots>
+	        <releases>
+	            <enabled>true</enabled>
+	            <updatePolicy>daily</updatePolicy>
+	        </releases>
+        </repository>
+-->	  	
+        <repository>
+            <id>com.formdev</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>language-all</artifactId>
+            <version>${lt-revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>languagetool-core</artifactId>
+            <version>${lt-revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.optimaize.languagedetector</groupId>
+                    <artifactId>language-detector</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>languagetool-http-client</artifactId>
+            <version>${lt-revision}</version>
+        </dependency>
+-->
+        <dependency>
+            <groupId>${office.id}</groupId>
+            <artifactId>juh</artifactId>
+            <version>${office.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${office.id}</groupId>
+            <artifactId>jurt</artifactId>
+            <version>${office.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${office.id}</groupId>
+            <artifactId>ridl</artifactId>
+            <version>${office.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${office.id}</groupId>
+            <artifactId>unoil</artifactId>
+            <version>${office.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>${flatlaf.version}</version>
+        </dependency>
+<!--        
+		<dependency>
+		    <groupId>org.libreoffice.ext</groupId>
+		    <artifactId>unohelper</artifactId>
+		    <version>${unohelper.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>${jsoup.version}</version>
+		</dependency>
+-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${org.jetbrains.annotations.version}</version>
+                <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+<!--                 <filtering>true</filtering>   -->
+            </resource>
+            <resource>
+                <targetPath>META-INF</targetPath>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>CHANGES.txt</include>
+                    <include>COPYING.txt</include>
+                    <include>README.txt</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <!-- as we later unzip the language JARs (see oxt.xml), we need to add the top directory to the classpath: -->
+                            <Class-Path>./</Class-Path>
+                            <RegistrationClassName>org.writingtool.WritingTool</RegistrationClassName>
+                            <ComponentVersion>${revision}</ComponentVersion>
+                            <Implementation-Date>${maven.build.timestamp}</Implementation-Date>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/oxt.xml</descriptor>
+                    </descriptors>
+                    <finalName>WritingToolLight-${revision}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <addExtensions>false</addExtensions>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+		<!-- snapshot revision -->
+        <revision>25.10</revision>
+        <lt-revision>6.7</lt-revision>
+        
+		<!-- release revision
+        <revision>1.2</revision>
+        <lt-revision>6.6</lt-revision>
+         -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <!-- <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format> -->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss Z</maven.build.timestamp.format>
+        <!--Maven-Plugin-Versions -->
+        <!-- NOTE: don't update without testing OpenOffice, 3.0.2 caused "Got no data stream!" after add-on installation -->
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-shade-plugin>3.2.4</maven-shade-plugin>
+        <maven-jflex-plugin.version>1.4.3-r1</maven-jflex-plugin.version>
+        <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
+        <git-commit-id-plugin-17.version>5.0.0</git-commit-id-plugin-17.version>
+        <git-commit-id-plugin-8.version>4.0.0</git-commit-id-plugin-8.version>
+        <!-- grpc related plugins check for updates if grpc is updated -->
+        <kr.motd.maven.os-maven-plugin.version>1.6.2</kr.motd.maven.os-maven-plugin.version>
+        <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+        <dependency-check-maven.pluging.version>7.4.4</dependency-check-maven.pluging.version>
+        <org.jetbrains.annotations.version>26.0.2</org.jetbrains.annotations.version>
+        <flatten.version>1.4.1</flatten.version>
+        <flatlaf.version>3.6</flatlaf.version>
+        <office.id>org.openoffice</office.id>
+        <office.version>4.1.2</office.version>
+<!--
+        <office.id>org.libreoffice</office.id>
+        <office.version>5.0.3</office.version>   
+-->
+        <sortpom-maven.plugin.version>3.2.1</sortpom-maven.plugin.version>
+    </properties>
+
+
+</project>
