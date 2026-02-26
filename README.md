@@ -16,6 +16,6 @@ The following features are offered:
 
 Unlike the full version of WritingTool, WritingToolLight does not support cross-paragraph text checking, a caching mechanism, statistical analysis, or AI integration.
 
-You can find more information (requirements, licence, downloads, etc.) here: https://writingtool.org
+Further information (requirements, license, downloads, etc.) can be found here: https://writingtool.org
 
 
