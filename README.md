@@ -2,7 +2,9 @@
 
 ***NOTE: WritingTool requires Java 17 or higher now***
 
-WritingToolLight is a extension for OpenOffice / LibreOffice that adds a writing assistant on the bases of LanguageTool to text editing.
+WritingToolLight is an extension for OpenOffice/LibreOffice that enhances text editing with grammar checking (and additional spell checking) based on LanguageTool.
+The following features are offered:
+* The application runs locally on the computer by default. Therefore, no remote server is required.
 
 
 You can find more information (requirements, licence, downloads, etc.) here: https://writingtool.org
