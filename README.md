@@ -13,7 +13,9 @@ The following features are offered:
   * Define custom colors and styles for rule groups or individual rules
   * Change parameters for specific special rules
   * Define profiles for checking different document types
+
 Unlike the full version of WritingTool, WritingToolLight does not support cross-paragraph text checking, a caching mechanism, statistical analysis, or AI integration.
+
 You can find more information (requirements, licence, downloads, etc.) here: https://writingtool.org
 
 
