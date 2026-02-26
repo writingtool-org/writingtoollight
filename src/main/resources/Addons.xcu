@@ -54,19 +54,6 @@
                     </prop>
                 </node>
             </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtNext" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?nextError</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTNextSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTNextBig.png</value>
-                    </prop>
-                </node>
-            </node>
             <node oor:name="org.writingtool.WritingTool.imageLtRefresh" oor:op="replace">
                 <prop oor:name="URL" oor:type="xs:string">
                     <value>service:org.writingtool.WritingTool?refreshCheck</value>
@@ -93,203 +80,6 @@
                     </prop>
                 </node>
             </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtStatisticalAnalyses" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?statisticalAnalyses</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTStatAnSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTStatAnBig.png</value>
-                    </prop>
-                </node>
-            </node>
-<!--
-            <node oor:name="org.writingtool.WritingTool.imageLtStatisticalAnalysesOff" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?offStatisticalAnalyses</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTStatAnOffSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTStatAnOffBig.png</value>
-                    </prop>
-                </node>
-            </node>
--->
-            <node oor:name="org.writingtool.WritingTool.imageLtActivateRules" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?activateRules</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTActivateRulesSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTActivateRulesBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtBackCheckOff" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?backgroundCheckOff</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTBackCheckOffSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTBackCheckOffBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtBackCheckOn" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?backgroundCheckOn</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTBackCheckOnSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTBackCheckOnBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtResetPermanent" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?resetIgnorePermanent</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTResetPermanentSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTResetPermanentBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtProfiles" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?profiles</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTProfilesSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTProfilesBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiGeneralCommand" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiGeneralCommand</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiGeneralSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiGeneralBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiTranslateText" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiTranslateText</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiTranslateTextSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiTranslateTextBig.png</value>
-                    </prop>
-                </node>
-            </node>
-             <node oor:name="org.writingtool.WritingTool.imageLtAiTextToSpeech" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiTextToSpeech</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiTextToSpeechSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiTextToSpeechBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiBetterStyle" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiBetterStyle</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiBetterStyleSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiBetterStyleBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiReformulateText" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiReformulateText</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiReformulateSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiReformulateBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiAdvanceText" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiAdvanceText</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiExpandSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiExpandBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiSynonymsOfWord" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiSynonymsOfWord</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiWordSynonymsSmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiWordSynonymsBig.png</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.writingtool.WritingTool.imageLtAiSummary" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>service:org.writingtool.WritingTool?aiSummary</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiSummarySmall.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value>vnd.sun.star.extension://org.openoffice.writingtool.oxt/images/WTAiSummaryBig.png</value>
-                    </prop>
-                </node>
-            </node>
         </node>
         <node oor:name="OfficeToolBar">
             <node oor:name="org.writingtool.WritingTool.toolbar" oor:op="replace">
@@ -301,7 +91,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Check Text</value>
@@ -340,7 +130,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Recheck Document</value>
@@ -394,7 +184,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Options...</value>
@@ -433,7 +223,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">About...</value>
@@ -474,7 +264,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Check Text</value>
@@ -513,7 +303,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Recheck Document</value>
@@ -567,7 +357,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">Options...</value>
@@ -606,7 +396,7 @@
                         <value>_self</value>
                     </prop>
                     <prop oor:name="Context" oor:type="xs:string">
-                        <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                        <value>com.sun.star.text.TextDocument</value>
                     </prop>
                     <prop oor:name="Title" oor:type="xs:string">
                     <value xml:lang="en-US">About...</value>
@@ -663,7 +453,7 @@
             <value>AddPath</value>
           </prop>
           <prop oor:name="MergeContext" oor:type="xs:string">
-            <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+            <value>com.sun.star.text.TextDocument</value>
           </prop>
           <node oor:name="MenuItems">
             <node oor:name="M0" oor:op="replace">
@@ -726,7 +516,7 @@
                     <value>_self</value>
                   </prop>
                   <prop oor:name="Context" oor:type="xs:string">
-                    <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                    <value>com.sun.star.text.TextDocument</value>
                   </prop>
                 </node>
                 <node oor:name="M3" oor:op="replace">
@@ -765,7 +555,7 @@
                     <value>_self</value>
                   </prop>
                   <prop oor:name="Context" oor:type="xs:string">
-                    <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                    <value>com.sun.star.text.TextDocument</value>
                   </prop>
                 </node>
                 <node oor:name="M4" oor:op="replace">
@@ -824,7 +614,7 @@
                     <value>_self</value>
                   </prop>
                   <prop oor:name="Context" oor:type="xs:string">
-                    <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                    <value>com.sun.star.text.TextDocument</value>
                   </prop>
                 </node>
                 <node oor:name="M7" oor:op="replace">
@@ -862,7 +652,7 @@
                     <value>_self</value>
                   </prop>
                   <prop oor:name="Context" oor:type="xs:string">
-                    <value>com.sun.star.text.TextDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument</value>
+                    <value>com.sun.star.text.TextDocument</value>
                   </prop>
                 </node>
               </node>
