@@ -69,7 +69,6 @@ public class WtConfigurationDialog implements ActionListener {
   private static final int SHIFT1 = 4;
   private static final int SHIFT2 = 20;
   private static final int SHIFT3 = 44;
-  private static final int YSHIFT1 = 8;
 
   private final ResourceBundle messages;
   private final WtConfiguration original;
@@ -476,7 +475,7 @@ public class WtConfigurationDialog implements ActionListener {
       tabpane.add(label, new JScrollPane(jPane));
     }
     
-    //    technical options tab
+    //     options tab
     jPane = new JPanel();
     jPane.setLayout(new GridBagLayout());
     cons = new GridBagConstraints();
@@ -494,16 +493,6 @@ public class WtConfigurationDialog implements ActionListener {
     }
     tabpane.add(label, new JScrollPane(jPane));
     
-    //    AI options tab
-    //    onlySingleParagraphMode doesn't support cache so AI can't be used
-    if (!config.onlySingleParagraphMode()) {
-      jPane = new JPanel();
-      jPane.setLayout(new GridBagLayout());
-      jPane.add(getOfficeAiElements(), cons);
-      label = messages.getString("guiAiSupportSettings");
-      tabpane.add(label, new JScrollPane(jPane));
-    }
-
     Container contentPane = dialog.getContentPane();
     contentPane.setLayout(new GridBagLayout());
     cons = new GridBagConstraints();
@@ -798,121 +787,7 @@ public class WtConfigurationDialog implements ActionListener {
     cons.gridy++;
     portPanel.add(languagePanel, cons);
   }
-/*
-  private void addOfficeTextruleElements(GridBagConstraints cons, JPanel portPanel) {
-    int numParaCheck = config.getNumParasToCheck();
-    boolean useTextLevelQueue = config.useTextLevelQueue();
-    JRadioButton[] radioButtons = new JRadioButton[3];
-    ButtonGroup numParaGroup = new ButtonGroup();
-    radioButtons[0] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiTextCheckMode")));
-    radioButtons[0].setActionCommand("FullTextCheck");
-    
-    radioButtons[1] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiParagraphCheckMode")));
-    radioButtons[1].setActionCommand("ParagraphCheck");
 
-    radioButtons[2] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiDeveloperModeCheck")));
-    radioButtons[2].setActionCommand("NParagraphCheck");
-
-    JTextField numParaField = new JTextField(Integer.toString(5), 2);
-    numParaField.setEnabled(radioButtons[2].isSelected());
-    numParaField.setMinimumSize(new Dimension(30, 25));
-    
-    for (int i = 0; i < 3; i++) {
-      numParaGroup.add(radioButtons[i]);
-    }
-
-     // NOTE: The flatparagraph iterator doesn't work for OpenOffice (OO).
-     //       So no support of cache is possible for OO
-    if (numParaCheck == 0 || config.onlySingleParagraphMode()) {
-      radioButtons[1].setSelected(true);
-      numParaField.setEnabled(false);
-      config.setUseTextLevelQueue(false);
-      if (config.onlySingleParagraphMode()) {
-        radioButtons[0].setEnabled(false);
-        radioButtons[2].setEnabled(false);
-      }
-    } else if (useTextLevelQueue) {
-      radioButtons[0].setSelected(true);
-      numParaField.setEnabled(false);
-      config.setNumParasToCheck(-2);
-    } else {
-      radioButtons[2].setSelected(true);
-      numParaField.setText(Integer.toString(numParaCheck));
-      numParaField.setEnabled(true);
-    }
-
-    radioButtons[0].addActionListener(e -> {
-      numParaField.setEnabled(false);
-      config.setNumParasToCheck(-2);
-      config.setUseTextLevelQueue(true);
-    });
-    
-    radioButtons[1].addActionListener(e -> {
-      numParaField.setEnabled(false);
-      config.setNumParasToCheck(0);
-      config.setUseTextLevelQueue(false);
-    });
-    
-    radioButtons[2].addActionListener(e -> {
-      int numParaCheck1 = Integer.parseInt(numParaField.getText());
-      if (numParaCheck1 < -2) numParaCheck1 = -2;
-      else if (numParaCheck1 > 99) numParaCheck1 = 99;
-      config.setNumParasToCheck(numParaCheck1);
-      numParaField.setForeground(Color.BLACK);
-      numParaField.setText(Integer.toString(numParaCheck1));
-      numParaField.setEnabled(true);
-      config.setUseTextLevelQueue(false);
-    });
-    
-    numParaField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        try {
-          int numParaCheck = Integer.parseInt(numParaField.getText());
-          if (numParaCheck > -3 && numParaCheck < 99) {
-            numParaField.setForeground(Color.BLACK);
-            config.setNumParasToCheck(numParaCheck);
-          } else {
-            numParaField.setForeground(Color.RED);
-          }
-        } catch (NumberFormatException ex) {
-          numParaField.setForeground(Color.RED);
-        }
-      }
-    });
-
-    JLabel textChangedLabel = new JLabel(WtGeneralTools.getLabel(messages.getString("guiSentenceExceedingRules")));
-    cons.gridy++;
-    portPanel.add(textChangedLabel, cons);
-    
-    JPanel radioPanel = new JPanel();
-    radioPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(0, 0, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    for (int i = 0; i < 3; i++) {
-      radioPanel.add(radioButtons[i], cons1);
-      if (i < 2) cons1.gridy++;
-    }
-    cons1.gridx = 1;
-    radioPanel.add(numParaField, cons1);
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridy++;
-    portPanel.add(radioPanel, cons);
-  }
-*/  
   private JPanel getOfficeTechnicalElements() {
     // technical settings
     JPanel panel = new JPanel();
@@ -934,8 +809,6 @@ public class WtConfigurationDialog implements ActionListener {
     cons11.fill = GridBagConstraints.NONE;
     cons11.weightx = 0.0f;
     addNgramPanel(cons11, ngramPanel);
-    JCheckBox paragraphModeBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiParagraphCheckMode")));
-    JCheckBox saveCacheBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiSaveCacheToFile")));
     JTextField otherServerNameField = new JTextField(config.getServerUrl() ==  null ? "" : config.getServerUrl(), 25);
     otherServerNameField.setMinimumSize(new Dimension(100, 25));
     otherServerNameField.getDocument().addDocumentListener(new DocumentListener() {
@@ -962,28 +835,6 @@ public class WtConfigurationDialog implements ActionListener {
         }
       }
     });
-/*
-    JCheckBox useServerBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiUseServer")) + " ");
-    useServerBox.setSelected(config.useOtherServer());
-    useServerBox.addItemListener(e -> {
-      int select = WtOptionPane.OK_OPTION;
-      boolean selected = useServerBox.isSelected();
-      if(selected && firstSelection) {
-        select = showRemoteServerHint(useServerBox, true);
-        firstSelection = false;
-      } else {
-        firstSelection = true;
-      }
-      if(select == WtOptionPane.OK_OPTION) {
-        useServerBox.setSelected(selected);
-        config.setUseOtherServer(useServerBox.isSelected());
-        otherServerNameField.setEnabled(useServerBox.isSelected());
-      } else {
-        useServerBox.setSelected(false);
-        firstSelection = true;
-      }
-    });
-*/
     JLabel usernameLabel = new JLabel(WtGeneralTools.getLabel(messages.getString("guiPremiumUsername")));
 
     JTextField usernameField = new JTextField(config.getRemoteUsername() ==  null ? "" : config.getRemoteUsername(), 25);
@@ -1035,29 +886,11 @@ public class WtConfigurationDialog implements ActionListener {
         }
       }
     });
-/*
-    JCheckBox isPremiumBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiUsePremiumAccount")) + " ");
-    isPremiumBox.setSelected(config.isPremium());
-    isPremiumBox.addItemListener(e -> {
-      boolean selected = isPremiumBox.isSelected();
-      config.setPremium(selected);
-      usernameLabel.setEnabled(selected);
-      usernameField.setEnabled(selected);
-      apiKeyLabel.setEnabled(selected);
-      apiKeyField.setEnabled(selected);
-    });
-*/    
 
-    if (config.getNumParasToCheck() == 0 || config.onlySingleParagraphMode()) {
-      config.setMultiThreadLO(false);
-      config.setUseTextLevelQueue(false);
-      config.setNumParasToCheck(0);
-    }
-    
     JRadioButton[] localeRemoteCheckButtons = new JRadioButton[2];
     ButtonGroup localeRemoteCheckGroup = new ButtonGroup();
 
-    JRadioButton[] localeCheckButtons = new JRadioButton[3];
+    JRadioButton[] localeCheckButtons = new JRadioButton[2];
     ButtonGroup localeCheckGroup = new ButtonGroup();
     localeCheckButtons[0] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiOneThread")));
     localeCheckButtons[0].addActionListener(e -> {
@@ -1067,29 +900,16 @@ public class WtConfigurationDialog implements ActionListener {
       apiKeyLabel.setEnabled(false);
       apiKeyField.setEnabled(false);
       config.setMultiThreadLO(false);
-      config.setUseTextLevelQueue(false);
       config.setRemoteCheck(false);
     });
-    localeCheckButtons[1] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiTwoThreads")));
+    localeCheckButtons[1] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiMultiThread")));
     localeCheckButtons[1].addActionListener(e -> {
       otherServerNameField.setEnabled(false);
       usernameLabel.setEnabled(false);
       usernameField.setEnabled(false);
       apiKeyLabel.setEnabled(false);
       apiKeyField.setEnabled(false);
-      config.setMultiThreadLO(false);
-      config.setUseTextLevelQueue(true);
-      config.setRemoteCheck(false);
-    });
-    localeCheckButtons[2] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiMultiThread")));
-    localeCheckButtons[2].addActionListener(e -> {
-      otherServerNameField.setEnabled(false);
-      usernameLabel.setEnabled(false);
-      usernameField.setEnabled(false);
-      apiKeyLabel.setEnabled(false);
-      apiKeyField.setEnabled(false);
       config.setMultiThreadLO(true);
-      config.setUseTextLevelQueue(true);
       config.setRemoteCheck(false);
     });
     JRadioButton[] remoteCheckButtons = new JRadioButton[3];
@@ -1151,15 +971,10 @@ public class WtConfigurationDialog implements ActionListener {
       usernameField.setEnabled(false);
       apiKeyLabel.setEnabled(false);
       apiKeyField.setEnabled(false);
-      config.setMultiThreadLO(localeCheckButtons[2].isSelected());
-      config.setUseTextLevelQueue(!localeCheckButtons[0].isSelected());
+      config.setMultiThreadLO(localeCheckButtons[1].isSelected());
       config.setRemoteCheck(false);
-      if (config.getNumParasToCheck() == 0) {
-        localeCheckButtons[0].setEnabled(true);
-      } else {
-        for (int i = 0; i < 3; i++) {
-          localeCheckButtons[i].setEnabled(true);
-        }
+      for (int i = 0; i < 2; i++) {
+        localeCheckButtons[i].setEnabled(true);
       }
       for (int i = 0; i < 3; i++) {
         remoteCheckButtons[i].setEnabled(false);
@@ -1176,7 +991,6 @@ public class WtConfigurationDialog implements ActionListener {
         firstSelection = true;
       }
       if(select == WtOptionPane.OK_OPTION) {
-//        typeOfCheckButtons[2].setSelected(selected);
         otherServerNameField.setEnabled(config.useOtherServer());
         usernameLabel.setEnabled(config.isPremium());
         usernameField.setEnabled(config.isPremium());
@@ -1184,7 +998,7 @@ public class WtConfigurationDialog implements ActionListener {
         apiKeyField.setEnabled(config.isPremium());
         config.setMultiThreadLO(false);
         config.setRemoteCheck(true);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
           localeCheckButtons[i].setEnabled(false);
         }
         for (int i = 0; i < 3; i++) {
@@ -1198,7 +1012,7 @@ public class WtConfigurationDialog implements ActionListener {
     for (int i = 0; i < 2; i++) {
       localeRemoteCheckGroup.add(localeRemoteCheckButtons[i]);
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       localeCheckGroup.add(localeCheckButtons[i]);
     }
     for (int i = 0; i < 3; i++) {
@@ -1211,15 +1025,10 @@ public class WtConfigurationDialog implements ActionListener {
     } else {
       remoteCheckButtons[0].setSelected(true);
     }
-    if (config.useTextLevelQueue()) {
-      if (config.isMultiThread()) {
-        localeCheckButtons[2].setSelected(true);
-      } else {
-        localeCheckButtons[1].setSelected(true);
-      }
+    if (config.isMultiThread()) {
+      localeCheckButtons[1].setSelected(true);
     } else {
       localeCheckButtons[0].setSelected(true);
-      config.setMultiThreadLO(false);
     }
     if (config.doRemoteCheck()) {
       localeRemoteCheckButtons[1].setSelected(true);
@@ -1229,7 +1038,7 @@ public class WtConfigurationDialog implements ActionListener {
       apiKeyLabel.setEnabled(config.isPremium());
       apiKeyField.setEnabled(config.isPremium());
       config.setMultiThreadLO(false);
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 2; i++) {
         localeCheckButtons[i].setEnabled(false);
       }
       for (int i = 0; i < 3; i++) {
@@ -1244,15 +1053,8 @@ public class WtConfigurationDialog implements ActionListener {
       apiKeyField.setEnabled(false);
       ngramPanel.setVisible(true);
       config.setRemoteCheck(false);
-      if (config.getNumParasToCheck() == 0) {
-        localeCheckButtons[0].setEnabled(true);
-        for (int i = 1; i < 3; i++) {
-          localeCheckButtons[i].setEnabled(false);
-        }
-      } else {
-        for (int i = 0; i < 3; i++) {
-          localeCheckButtons[i].setEnabled(true);
-        }
+      for (int i = 0; i < 2; i++) {
+        localeCheckButtons[i].setEnabled(true);
       }
       for (int i = 0; i < 3; i++) {
         remoteCheckButtons[i].setEnabled(false);
@@ -1261,7 +1063,7 @@ public class WtConfigurationDialog implements ActionListener {
     cons.insets = new Insets(2, SHIFT1, 2, 0);
     panel.add(localeRemoteCheckButtons[0], cons);
     cons.insets = new Insets(2, SHIFT2, 2, 0);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       cons.gridy++;
       panel.add(localeCheckButtons[i], cons);
     }
@@ -1299,84 +1101,6 @@ public class WtConfigurationDialog implements ActionListener {
     cons.gridy++;
     panel.add(serverExampleLabel, cons);
     
-    
-/*
-    JPanel serverPanel = new JPanel();
-    serverPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    serverPanel.add(useServerBox, cons1);
-    cons1.gridx++;
-    serverPanel.add(otherServerNameField, cons1);
-    JLabel serverExampleLabel = new JLabel(" " + WtGeneralTools.getLabel(messages.getString("guiUseServerExample")));
-    serverExampleLabel.setEnabled(false);
-    cons1.gridy++;
-    serverPanel.add(serverExampleLabel, cons1);
-    cons.gridx = 0;
-    cons.gridy++;
-    panel.add(serverPanel, cons);
-*/
-/*
-    JPanel premiumPanel = new JPanel();
-    premiumPanel.setLayout(new GridBagLayout());
-    cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    premiumPanel.add(isPremiumBox, cons1);
-    cons1.insets = new Insets(0, SHIFT3, 0, 0);
-    cons1.gridy++;
-    premiumPanel.add(usernameLabel, cons1);
-    cons1.gridy++;
-    premiumPanel.add(usernameField, cons1);
-    cons1.gridy++;
-    premiumPanel.add(apiKeyLabel, cons1);
-    cons1.gridy++;
-    premiumPanel.add(apiKeyField, cons1);
-    cons.gridx = 0;
-    cons.gridy++;
-    panel.add(premiumPanel, cons);
-*/
-    paragraphModeBox.setSelected(config.getNumParasToCheck() == 0 || config.onlySingleParagraphMode());
-    paragraphModeBox.setEnabled(!config.onlySingleParagraphMode());
-    paragraphModeBox.addItemListener(e1 -> {
-      if (paragraphModeBox.isSelected()) {
-        config.setNumParasToCheck(0);
-        config.setUseTextLevelQueue(false);
-        config.setMultiThreadLO(false);
-        localeCheckButtons[0].setSelected(true);
-        for (int i = 1; i < 3; i++) {
-          localeCheckButtons[i].setEnabled(false);
-        }
-      } else {
-        config.setNumParasToCheck(-2);
-        config.setMultiThreadLO(false);
-        if (localeRemoteCheckButtons[0].isSelected()) {
-          for (int i = 0; i < 3; i++) {
-            localeCheckButtons[i].setEnabled(true);
-          }
-        }
-      }
-    });
-    saveCacheBox.setSelected(config.saveLoCache() && !config.onlySingleParagraphMode());
-    saveCacheBox.setEnabled(!config.onlySingleParagraphMode());
-    saveCacheBox.addItemListener(e1 -> {
-      config.setSaveLoCache(saveCacheBox.isSelected());
-    });
-    cons.insets = new Insets(20, SHIFT1, 0, 0);
-    cons.gridx = 0;
-    cons.gridy++;
-    panel.add(paragraphModeBox, cons);
-    cons.gridy++;
-    panel.add(saveCacheBox, cons);
     return panel;
   }
   
@@ -1430,14 +1154,6 @@ public class WtConfigurationDialog implements ActionListener {
     cons.gridy++;
     portPanel.add(noSynonymsAsSuggestionsBox, cons);
 
-    JCheckBox includeTrackedChangesBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiIncludeTrackedChanges")));
-    includeTrackedChangesBox.setSelected(config.includeTrackedChanges());
-    includeTrackedChangesBox.addItemListener(e -> {
-      config.setIncludeTrackedChanges(includeTrackedChangesBox.isSelected());
-    });
-    cons.gridy++;
-    portPanel.add(includeTrackedChangesBox, cons);
-
     JCheckBox enableTmpOffRulesBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiActivateTempOffRules")));
     enableTmpOffRulesBox.setSelected(config.enableTmpOffRules());
     enableTmpOffRulesBox.addItemListener(e -> {
@@ -1453,38 +1169,6 @@ public class WtConfigurationDialog implements ActionListener {
     });
     cons.gridy++;
     portPanel.add(enableGoalSpecificRulesBox, cons);
-
-    JCheckBox filterOverlappingMatchesBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiFilterOverlappingMatches")));
-    filterOverlappingMatchesBox.setSelected(config.filterOverlappingMatches());
-    filterOverlappingMatchesBox.addItemListener(e -> {
-      config.setFilterOverlappingMatches(filterOverlappingMatchesBox.isSelected());
-    });
-    cons.gridy++;
-    portPanel.add(filterOverlappingMatchesBox, cons);
-
-    JCheckBox noCheckGrammarDirectSpeechBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiNoGrammarCheckWithinDirectSpeech")));
-    noCheckGrammarDirectSpeechBox.setSelected(config.getCheckDirectSpeech() == WtConfiguration.CHECK_DIRECT_SPEECH_NO);
-    noCheckGrammarDirectSpeechBox.addItemListener(e -> {
-      config.setCheckDirectSpeech(noCheckGrammarDirectSpeechBox.isSelected() ? 
-          WtConfiguration.CHECK_DIRECT_SPEECH_NO : WtConfiguration.CHECK_DIRECT_SPEECH_NO_STYLE);
-    });
-    
-    JCheckBox noCheckStyleDirectSpeechBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiNoStyleCheckWithinDirectSpeech")));
-    noCheckStyleDirectSpeechBox.setSelected(config.getCheckDirectSpeech() != WtConfiguration.CHECK_DIRECT_SPEECH_YES);
-    noCheckGrammarDirectSpeechBox.setEnabled(noCheckStyleDirectSpeechBox.isSelected());
-    noCheckStyleDirectSpeechBox.addItemListener(e -> {
-      config.setCheckDirectSpeech(noCheckStyleDirectSpeechBox.isSelected() ? (noCheckGrammarDirectSpeechBox.isSelected() ? 
-          WtConfiguration.CHECK_DIRECT_SPEECH_NO : WtConfiguration.CHECK_DIRECT_SPEECH_NO_STYLE) :
-          WtConfiguration.CHECK_DIRECT_SPEECH_YES);
-      noCheckGrammarDirectSpeechBox.setEnabled(noCheckStyleDirectSpeechBox.isSelected());
-    });
-    cons.gridy++;
-    portPanel.add(noCheckStyleDirectSpeechBox, cons);
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-
-    cons.gridy++;
-    portPanel.add(noCheckGrammarDirectSpeechBox, cons);
-    cons.insets = new Insets(0, SHIFT1, 0, 0);
 
     JCheckBox noBackgroundCheckBox = new JCheckBox(WtGeneralTools.getLabel(messages.getString("guiNoBackgroundCheck")));
     noBackgroundCheckBox.setSelected(config.noBackgroundCheck());
@@ -2680,694 +2364,6 @@ public class WtConfigurationDialog implements ActionListener {
       }
     });
     return ruleOptionsPanel;
-  }
-  
-  private JPanel getColorPanel(String category, String ruleId) {
-    //  Color Panel
-    JPanel colorPanel = new JPanel();
-    colorPanel.setLayout(null);
-    colorPanel.setBounds(0, 0, 120, 10);
-
-    colorPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(0, 0, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.weightx = 0.0f;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.anchor = GridBagConstraints.NORTHWEST;
-
-    JLabel underlineStyle = new JLabel(messages.getString("guiUColorStyleLabel") + " ");
-    colorPanel.add(underlineStyle);
-
-    JLabel underlineLabel = new JLabel(COLOR_LABEL);
-
-    JComboBox<String> underlineType = new JComboBox<>(getUnderlineTypes());
-    underlineType.setSelectedIndex(getUnderlineType(category, ruleId));
-    underlineType.addItemListener(e -> {
-      if (e.getStateChange() == ItemEvent.SELECTED) {
-        setUnderlineType(underlineType.getSelectedIndex(), category, ruleId);
-      }
-    });
-    cons1.gridx++;
-    colorPanel.add(underlineType);
-    cons1.gridx++;
-    colorPanel.add(underlineLabel);
-
-    JButton changeButton = new JButton(messages.getString("guiUColorChange"));
-    changeButton.addActionListener(e -> {
-      Color oldColor = underlineLabel.getForeground();
-      dialog.setAlwaysOnTop(false);
-      try {
-//        int theme = WtDocumentsHandler.getJavaLookAndFeelSet();
-//        WtGeneralTools.setJavaLookAndFeel(WtGeneralTools.THEME_SYSTEM);
-        JColorChooser colorChooser = new JColorChooser(oldColor);
-        ActionListener okActionListener = new ActionListener() {
-          public void actionPerformed(ActionEvent actionEvent) {
-            Color newColor = colorChooser.getColor();
-            if(newColor != null && newColor != oldColor) {
-              underlineLabel.setForeground(newColor);
-              if (ruleId == null) {
-                config.setUnderlineColor(category, newColor);
-              } else {
-                config.setUnderlineRuleColor(ruleId, newColor);
-              }
-            }
-            dialog.setAlwaysOnTop(true);
-          }
-        };
-        // For cancel selection, change button background to red
-        ActionListener cancelActionListener = new ActionListener() {
-          public void actionPerformed(ActionEvent actionEvent) {
-            dialog.setAlwaysOnTop(true);
-          }
-        };
-        JDialog colorDialog = JColorChooser.createDialog(dialog, messages.getString("guiUColorDialogHeader"), true,
-            colorChooser, okActionListener, cancelActionListener);
-        colorDialog.setAlwaysOnTop(true);
-        colorDialog.toFront();
-        colorDialog.setVisible(true);
-//        WtGeneralTools.setJavaLookAndFeel(theme);
-      } catch (Exception e1) {
-        WtMessageHandler.printException(e1);
-      }
-    });
-    cons1.gridx++;
-    colorPanel.add(changeButton);
-  
-    JButton defaultButton = new JButton(messages.getString("guiUColorDefault"));
-    defaultButton.addActionListener(e -> {
-      if (ruleId == null) {
-        config.setDefaultUnderlineColor(category);
-      } else {
-        config.setDefaultUnderlineRuleColor(ruleId);
-      }
-      underlineLabel.setForeground(config.getUnderlineColor(category, ruleId));
-      if ( ruleId == null) {
-        config.setDefaultUnderlineType(category);
-      } else {
-        config.setDefaultUnderlineRuleType(ruleId);
-      }
-      underlineType.setSelectedIndex(getUnderlineType(category, ruleId));
-      config.removeConfigurableValue(ruleId);
-    });
-    cons1.gridx++;
-    colorPanel.add(defaultButton);
-    underlineLabel.setForeground(config.getUnderlineColor(category, ruleId));
-    underlineLabel.setBackground(config.getUnderlineColor(category, ruleId));
-    underlineType.setSelectedIndex(getUnderlineType(category, ruleId));
-    colorPanel.setVisible(true);
-    // End of Color Panel
-    return colorPanel;
-  }
-  
-  private JPanel getAiInstallationHint() {
-    JPanel panel = new JPanel();
-    panel.setLayout(new GridBagLayout());
-    GridBagConstraints cons = new GridBagConstraints();
-    cons.insets = new Insets(2, 2, 2, 2);
-    cons.gridx = 0;
-    cons.gridy = 0;
-    cons.weightx = 1.0f;
-    cons.fill = GridBagConstraints.HORIZONTAL;
-    cons.anchor = GridBagConstraints.NORTHWEST;
-    JLabel label = new JLabel(messages.getString("guiAiInstallationHint") + ": ");
-    panel.add(label, cons);
-    cons.gridx++;
-    cons.weightx = 1.0f;
-    JButton installButton = new JButton(messages.getString("guiAiInstallationButton"));
-    installButton.addActionListener(e -> {
-      WtGeneralTools.openURL(WtOfficeTools.getUrl("localAiInstallation"));
-    });
-    panel.add(installButton, cons);
-    return panel;
-  }
-  
-  private JPanel getOfficeAiTextElements() {
-    JPanel aiOptionPanel = new JPanel();
-    aiOptionPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons = new GridBagConstraints();
-    cons.insets = new Insets(6, 6, 6, 6);
-    cons.gridx = 0;
-    cons.gridy = 0;
-    cons.anchor = GridBagConstraints.NORTHWEST;
-    cons.fill = GridBagConstraints.HORIZONTAL;
-    cons.weightx = 10.0f;
-    cons.weighty = 0.0f;
-    
-    JLabel otherUrlLabel = new JLabel(messages.getString("guiAiUrl") + ":");
-
-    JTextField aiUrlField = new JTextField(config.aiUrl() ==  null ? "" : config.aiUrl(), 25);
-    aiUrlField.setMinimumSize(new Dimension(100, 25));
-    aiUrlField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String serverName = aiUrlField.getText();
-        serverName = serverName.trim();
-        if(serverName.isEmpty()) {
-          serverName = null;
-        }
-        if (config.isValidAiServerUrl(serverName)) {
-          aiUrlField.setForeground(null);
-          config.setAiUrl(serverName);;
-        } else {
-          aiUrlField.setForeground(Color.RED);
-        }
-      }
-    });
-
-    JLabel modelLabel = new JLabel(messages.getString("guiAiModel") + ":");
-
-    JTextField modelField = new JTextField(config.aiModel() ==  null ? "" : config.aiModel(), 25);
-    modelField.setMinimumSize(new Dimension(100, 25));
-    modelField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String model = modelField.getText();
-        model = model.trim();
-        if(model.isEmpty()) {
-          model = null;
-        }
-        if (model != null) {
-          config.setAiModel(model);
-        }
-      }
-    });
-
-    JLabel apiKeyLabel = new JLabel(messages.getString("guiAiApiKey") + ":");
-
-    JTextField apiKeyField = new JTextField(config.aiApiKey() ==  null ? "" : config.aiApiKey(), 25);
-    apiKeyField.setMinimumSize(new Dimension(100, 25));
-    apiKeyField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String apiKey = apiKeyField.getText();
-        apiKey = apiKey.trim();
-        if(apiKey.isEmpty()) {
-          apiKey = null;
-        }
-        if (apiKey != null) {
-          config.setAiApiKey(apiKey);
-        }
-      }
-    });
-    
-    JRadioButton[] radioButtons = new JRadioButton[3];
-    ButtonGroup showStylisticChangesGroup = new ButtonGroup();
-    radioButtons[0] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiAiShowNoStylisticChanges")));
-    radioButtons[0].addActionListener(e -> {
-      config.setAiShowStylisticChanges(0);
-    });
-    radioButtons[1] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiAiShowSmallStylisticChanges")));
-    radioButtons[1].addActionListener(e -> {
-      config.setAiShowStylisticChanges(1);
-    });
-    radioButtons[2] = new JRadioButton(WtGeneralTools.getLabel(messages.getString("guiAiShowAllStylisticChanges")));
-    radioButtons[2].addActionListener(e -> {
-      config.setAiShowStylisticChanges(2);
-    });
-
-    for (int i = 0; i < 3; i++) {
-      if (config.aiShowStylisticChanges() == i) {
-        radioButtons[i].setSelected(true);
-      } else {
-        radioButtons[i].setSelected(false);
-      }
-      showStylisticChangesGroup.add(radioButtons[i]);
-    }
-    
-    JCheckBox aiAutoSuggestionBox = new JCheckBox(messages.getString("guiAiShowStylisticSuggestion"));
-    aiAutoSuggestionBox.setSelected(config.aiAutoSuggestion());
-    aiAutoSuggestionBox.addItemListener(e -> {
-      config.setAiAutoSuggestion(aiAutoSuggestionBox.isSelected());
-    });
-
-    JCheckBox autoCorrectBox = new JCheckBox(messages.getString("guiAiAutoCorrect"));
-    autoCorrectBox.setSelected(config.aiAutoCorrect());
-    autoCorrectBox.addItemListener(e -> {
-      config.setAiAutoCorrect(autoCorrectBox.isSelected());
-      for (JRadioButton rButton : radioButtons) {
-        rButton.setEnabled(autoCorrectBox.isSelected());
-      }
-      aiAutoSuggestionBox.setEnabled(autoCorrectBox.isSelected());
-    });
-
-    JCheckBox useAiSupportBox = new JCheckBox(messages.getString("guiUseAiSupport"));
-    useAiSupportBox.setSelected(config.useAiSupport());
-    useAiSupportBox.addItemListener(e -> {
-      config.setUseAiSupport(useAiSupportBox.isSelected());
-      aiUrlField.setEnabled(useAiSupportBox.isSelected());
-      modelField.setEnabled(useAiSupportBox.isSelected());
-      apiKeyField.setEnabled(useAiSupportBox.isSelected());
-      autoCorrectBox.setEnabled(useAiSupportBox.isSelected());
-      for (JRadioButton rButton : radioButtons) {
-        rButton.setEnabled(useAiSupportBox.isSelected() && autoCorrectBox.isSelected());
-      }
-      aiAutoSuggestionBox.setEnabled(useAiSupportBox.isSelected() && autoCorrectBox.isSelected());
-    });
-    
-    aiUrlField.setEnabled(config.useAiSupport());
-    modelField.setEnabled(config.useAiSupport());
-    apiKeyField.setEnabled(config.useAiSupport());
-    autoCorrectBox.setEnabled(config.useAiSupport());
-    for (JRadioButton rButton : radioButtons) {
-      rButton.setEnabled(config.useAiSupport() && config.aiAutoCorrect());
-    }
-
-    JLabel experimentalHint = new JLabel(messages.getString("guiAiExperimentalHint"));
-    experimentalHint.setForeground(Color.red);
-    cons.gridy++;
-    aiOptionPanel.add(experimentalHint, cons);
-    JLabel qualityHint = new JLabel(messages.getString("guiAiQualityHint"));
-    if (config.getThemeSelection() == WtGeneralTools.THEME_FLATDARK) {
-      qualityHint.setForeground(WtConfiguration.HINT_COLOR_BLUE);
-    } else {
-      qualityHint.setForeground(Color.blue);
-    }
-    cons.gridy++;
-    aiOptionPanel.add(qualityHint, cons);
-    cons.gridy++;
-    aiOptionPanel.add(getAiInstallationHint(), cons);
-    cons.insets = new Insets(16, SHIFT2, 0, 0);
-    cons.gridy++;
-    aiOptionPanel.add(useAiSupportBox, cons);
-    JPanel serverPanel = new JPanel();
-    serverPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    serverPanel.add(otherUrlLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(aiUrlField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(modelLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(modelField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyField, cons1);
-
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridx = 0;
-    cons.gridy++;
-    aiOptionPanel.add(serverPanel, cons);
-    
-    cons.gridy++;
-    cons.insets = new Insets(16, SHIFT2, 0, 0);
-    aiOptionPanel.add(autoCorrectBox, cons);
-    
-    cons.insets = new Insets(0, SHIFT3, 0, 0);
-    
-    for (JRadioButton rButton : radioButtons) {
-      cons.gridy++;
-      aiOptionPanel.add(rButton, cons);
-    }
-    
-    cons.gridy++;
-    aiOptionPanel.add(aiAutoSuggestionBox, cons);
-
-    cons.insets = new Insets(16, SHIFT2, 0, 0);
-    cons.gridy++;
-    JLabel grammarErrorColor = new JLabel(messages.getString("guiAiGrammarErrorColor") + ":");
-    aiOptionPanel.add(grammarErrorColor, cons);
-    
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridy++;
-    aiOptionPanel.add(getColorPanel(WtOfficeTools.AI_GRAMMAR_CATEGORY, WtOfficeTools.AI_GRAMMAR_HINT_RULE_ID), cons);
-
-    cons.insets = new Insets(12, SHIFT2, 0, 0);
-    cons.gridy++;
-    JLabel stylisticErrorColor = new JLabel(messages.getString("guiAiStylisticErrorColor") + ":");
-    aiOptionPanel.add(stylisticErrorColor, cons);
-    
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridy++;
-    aiOptionPanel.add(getColorPanel(WtOfficeTools.AI_STYLE_CATEGORY, WtOfficeTools.AI_GRAMMAR_OTHER_RULE_ID), cons);
-
-    return aiOptionPanel;
-  }
-  
-  private JPanel getOfficeAiImgElements() {
-    JPanel aiOptionPanel = new JPanel();
-    aiOptionPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons = new GridBagConstraints();
-    cons.insets = new Insets(6, 6, 6, 6);
-    cons.gridx = 0;
-    cons.gridy = 0;
-    cons.anchor = GridBagConstraints.NORTHWEST;
-    cons.fill = GridBagConstraints.HORIZONTAL;
-    cons.weightx = 10.0f;
-    cons.weighty = 0.0f;
-    
-    JLabel otherUrlLabel = new JLabel(messages.getString("guiAiUrl") + ":");
-
-    JTextField aiUrlField = new JTextField(config.aiImgUrl() ==  null ? "" : config.aiImgUrl(), 25);
-    aiUrlField.setMinimumSize(new Dimension(100, 25));
-    aiUrlField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String serverName = aiUrlField.getText();
-        serverName = serverName.trim();
-        if(serverName.isEmpty()) {
-          serverName = null;
-        }
-        if (config.isValidAiServerUrl(serverName)) {
-          aiUrlField.setForeground(Color.BLACK);
-          config.setAiImgUrl(serverName);;
-        } else {
-          aiUrlField.setForeground(Color.RED);
-        }
-      }
-    });
-
-    JLabel modelLabel = new JLabel(messages.getString("guiAiModel") + ":");
-
-    JTextField modelField = new JTextField(config.aiImgModel() ==  null ? "" : config.aiImgModel(), 25);
-    modelField.setMinimumSize(new Dimension(100, 25));
-    modelField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String model = modelField.getText();
-        model = model.trim();
-        if(model.isEmpty()) {
-          model = null;
-        }
-        if (model != null) {
-          config.setAiImgModel(model);
-        }
-      }
-    });
-
-    JLabel apiKeyLabel = new JLabel(messages.getString("guiAiApiKey") + ":");
-
-    JTextField apiKeyField = new JTextField(config.aiImgApiKey() ==  null ? "" : config.aiImgApiKey(), 25);
-    apiKeyField.setMinimumSize(new Dimension(100, 25));
-    apiKeyField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String apiKey = apiKeyField.getText();
-        apiKey = apiKey.trim();
-        if(apiKey.isEmpty()) {
-          apiKey = null;
-        }
-        if (apiKey != null) {
-          config.setAiImgApiKey(apiKey);
-        }
-      }
-    });
-    
-    JCheckBox useAiSupportBox = new JCheckBox(messages.getString("guiUseAiSupport"));
-    useAiSupportBox.setSelected(config.useAiImgSupport());
-    useAiSupportBox.addItemListener(e -> {
-      config.setUseAiImgSupport(useAiSupportBox.isSelected());
-      aiUrlField.setEnabled(useAiSupportBox.isSelected());
-      modelField.setEnabled(useAiSupportBox.isSelected());
-      apiKeyField.setEnabled(useAiSupportBox.isSelected());
-    });
-    
-    aiUrlField.setEnabled(config.useAiImgSupport());
-    modelField.setEnabled(config.useAiImgSupport());
-    apiKeyField.setEnabled(config.useAiImgSupport());
-
-    JLabel experimentalHint = new JLabel(messages.getString("guiAiExperimentalHint"));
-    experimentalHint.setForeground(Color.red);
-    cons.gridy++;
-    aiOptionPanel.add(experimentalHint, cons);
-    JLabel qualityHint = new JLabel(messages.getString("guiAiQualityHint"));
-    if (config.getThemeSelection() == WtGeneralTools.THEME_FLATDARK) {
-      qualityHint.setForeground(WtConfiguration.HINT_COLOR_BLUE);
-    } else {
-      qualityHint.setForeground(Color.blue);
-    }
-    cons.gridy++;
-    aiOptionPanel.add(qualityHint, cons);
-    cons.gridy++;
-    aiOptionPanel.add(getAiInstallationHint(), cons);
-    cons.insets = new Insets(16, SHIFT2, 0, 0);
-    cons.gridy++;
-    aiOptionPanel.add(useAiSupportBox, cons);
-    JPanel serverPanel = new JPanel();
-    serverPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    serverPanel.add(otherUrlLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(aiUrlField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(modelLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(modelField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyField, cons1);
-
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridx = 0;
-    cons.gridy++;
-    aiOptionPanel.add(serverPanel, cons);
-    cons.gridy++;
-    cons.weighty = 10.0f;
-    aiOptionPanel.add(new JLabel(" "), cons);
-    
-    return aiOptionPanel;
-  }
-  
-  private JPanel getOfficeAiTtsElements() {
-    JPanel aiOptionPanel = new JPanel();
-    aiOptionPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons = new GridBagConstraints();
-    cons.insets = new Insets(6, 6, 6, 6);
-    cons.gridx = 0;
-    cons.gridy = 0;
-    cons.anchor = GridBagConstraints.NORTHWEST;
-    cons.fill = GridBagConstraints.HORIZONTAL;
-    cons.weightx = 10.0f;
-    cons.weighty = 0.0f;
-    
-    JLabel otherUrlLabel = new JLabel(messages.getString("guiAiUrl") + ":");
-
-    JTextField aiUrlField = new JTextField(config.aiTtsUrl() ==  null ? "" : config.aiTtsUrl(), 25);
-    aiUrlField.setMinimumSize(new Dimension(100, 25));
-    aiUrlField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String serverName = aiUrlField.getText();
-        serverName = serverName.trim();
-        if(serverName.isEmpty()) {
-          serverName = null;
-        }
-        if (config.isValidAiServerUrl(serverName)) {
-          aiUrlField.setForeground(Color.BLACK);
-          config.setAiTtsUrl(serverName);;
-        } else {
-          aiUrlField.setForeground(Color.RED);
-        }
-      }
-    });
-
-    JLabel modelLabel = new JLabel(messages.getString("guiAiModel") + ":");
-
-    JTextField modelField = new JTextField(config.aiTtsModel() ==  null ? "" : config.aiTtsModel(), 25);
-    modelField.setMinimumSize(new Dimension(100, 25));
-    modelField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String model = modelField.getText();
-        model = model.trim();
-        if(model.isEmpty()) {
-          model = null;
-        }
-        if (model != null) {
-          config.setAiTtsModel(model);
-        }
-      }
-    });
-
-    JLabel apiKeyLabel = new JLabel(messages.getString("guiAiApiKey") + ":");
-
-    JTextField apiKeyField = new JTextField(config.aiTtsApiKey() ==  null ? "" : config.aiTtsApiKey(), 25);
-    apiKeyField.setMinimumSize(new Dimension(100, 25));
-    apiKeyField.getDocument().addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        changedUpdate(e);
-      }
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        String apiKey = apiKeyField.getText();
-        apiKey = apiKey.trim();
-        if(apiKey.isEmpty()) {
-          apiKey = null;
-        }
-        if (apiKey != null) {
-          config.setAiTtsApiKey(apiKey);
-        }
-      }
-    });
-    
-    JCheckBox useAiSupportBox = new JCheckBox(messages.getString("guiUseAiSupport"));
-    useAiSupportBox.setSelected(config.useAiTtsSupport());
-    useAiSupportBox.addItemListener(e -> {
-      config.setUseAiTtsSupport(useAiSupportBox.isSelected());
-      aiUrlField.setEnabled(useAiSupportBox.isSelected());
-      modelField.setEnabled(useAiSupportBox.isSelected());
-      apiKeyField.setEnabled(useAiSupportBox.isSelected());
-    });
-    
-    aiUrlField.setEnabled(config.useAiTtsSupport());
-    modelField.setEnabled(config.useAiTtsSupport());
-    apiKeyField.setEnabled(config.useAiTtsSupport());
-
-    JLabel experimentalHint = new JLabel(messages.getString("guiAiExperimentalHint"));
-    experimentalHint.setForeground(Color.red);
-    cons.gridy++;
-    aiOptionPanel.add(experimentalHint, cons);
-    JLabel qualityHint = new JLabel(messages.getString("guiAiQualityHint"));
-    if (config.getThemeSelection() == WtGeneralTools.THEME_FLATDARK) {
-      qualityHint.setForeground(WtConfiguration.HINT_COLOR_BLUE);
-    } else {
-      qualityHint.setForeground(Color.blue);
-    }
-    cons.gridy++;
-    aiOptionPanel.add(qualityHint, cons);
-    cons.gridy++;
-    aiOptionPanel.add(getAiInstallationHint(), cons);
-    cons.insets = new Insets(16, SHIFT2, 0, 0);
-    cons.gridy++;
-    aiOptionPanel.add(useAiSupportBox, cons);
-    JPanel serverPanel = new JPanel();
-    serverPanel.setLayout(new GridBagLayout());
-    GridBagConstraints cons1 = new GridBagConstraints();
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    cons1.gridx = 0;
-    cons1.gridy = 0;
-    cons1.anchor = GridBagConstraints.WEST;
-    cons1.fill = GridBagConstraints.NONE;
-    cons1.weightx = 0.0f;
-    serverPanel.add(otherUrlLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(aiUrlField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(modelLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(modelField, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(YSHIFT1, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyLabel, cons1);
-    cons1.gridy++;
-    cons1.insets = new Insets(0, SHIFT2, 0, 0);
-    serverPanel.add(apiKeyField, cons1);
-
-    cons.insets = new Insets(0, SHIFT2, 0, 0);
-    cons.gridx = 0;
-    cons.gridy++;
-    aiOptionPanel.add(serverPanel, cons);
-
-    cons.gridy++;
-    cons.weighty = 10.0f;
-    aiOptionPanel.add(new JLabel(" "), cons);
-    
-    return aiOptionPanel;
-  }
-  
-  private JTabbedPane getOfficeAiElements() {
-    JTabbedPane tabbedpane = new JTabbedPane();
-    tabbedpane.add(messages.getString("guiAiText"), getOfficeAiTextElements());
-    tabbedpane.add(messages.getString("guiAiImages"), getOfficeAiImgElements());
-    tabbedpane.add(messages.getString("guiAiTextToSpeech"), getOfficeAiTtsElements());
-    return tabbedpane;
   }
   
 }

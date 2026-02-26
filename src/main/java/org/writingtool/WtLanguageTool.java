@@ -64,7 +64,6 @@ public class WtLanguageTool {
   private final Language motherTongue;
   private final UserConfig userConfig;
 
-  private WtSortedTextRules sortedTextRules;
   private boolean isMultiThread;
   private boolean isRemote;
   private boolean doReset;
@@ -174,7 +173,6 @@ public class WtLanguageTool {
       // copy as the config thread may access this as well
       List<String> list = new ArrayList<>(enabledRuleIds);
       for (String ruleName : list) {
-//        MessageHandler.printToLogFile("Enable Rule: " + ruleName);
         enableRule(ruleName);
       }
     }
@@ -182,63 +180,8 @@ public class WtLanguageTool {
     Set<String> disabledLocaleRules = WtDocumentsHandler.getDisabledRules(langCode);
     if (disabledLocaleRules != null) {
       for (String id : disabledLocaleRules) {
-//        MessageHandler.printToLogFile("Disable local Rule: " + id + ", Locale: " + lt.getLanguage().getShortCodeWithCountryAndVariant());
         disableRule(id);
       }
-    }
-    sortedTextRules = new WtSortedTextRules(this, config, WtDocumentsHandler.getDisabledRules(langCode), checkImpressDocument);
-//    handleLtDictionary();
-  }
-  
-  /**
-   * reset sorted text level rules
-   */
-  public void resetSortedTextRules(boolean checkImpressDocument) throws Throwable {
-    String langCode = getLanguage().getShortCodeWithCountryAndVariant();
-    sortedTextRules = new WtSortedTextRules(this, config, WtDocumentsHandler.getDisabledRules(langCode), checkImpressDocument);
-  }
-
-  /**
-   * Returns a list of different numbers of paragraphs to check for text level rules
-   */
-  public List<Integer> getNumMinToCheckParas() {
-    if (sortedTextRules == null) {
-      return null;
-    }
-    return sortedTextRules.minToCheckParagraph;
-  }
-
-  /**
-   * Test if sorted rules for index exist
-   */
-  public boolean isSortedRuleForIndex(int index) {
-    if (index < 0 || sortedTextRules == null
-        || index >= sortedTextRules.textLevelRules.size() || sortedTextRules.textLevelRules.get(index).isEmpty()) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * activate all rules stored under a given index related to the list of getNumMinToCheckParas
-   * deactivate all other text level rules
-   */
-  public void activateTextRulesByIndex(int index) {
-    if (sortedTextRules != null) {
-      if (index == WtOfficeTools.CACHE_AI) {
-        sortedTextRules.reactivateTextRules(this);
-      } else {
-        sortedTextRules.activateTextRulesByIndex(index, this);
-      }
-    }
-  }
-
-  /**
-   * reactivate all text level rules
-   */
-  public void reactivateTextRules() {
-    if (sortedTextRules != null) {
-      sortedTextRules.reactivateTextRules(this);
     }
   }
   

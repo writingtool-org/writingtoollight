@@ -62,21 +62,14 @@ public class WtConfiguration {
   public final static short UNDERLINE_BOLD = 12;
   public final static short UNDERLINE_DASH = 5;
   
-  public final static int CHECK_DIRECT_SPEECH_YES = 0;
-  public final static int CHECK_DIRECT_SPEECH_NO_STYLE = 1;
-  public final static int CHECK_DIRECT_SPEECH_NO = 2;
-  
   static final int DEFAULT_SERVER_PORT = 8081;  // should be HTTPServerConfig.DEFAULT_PORT but we don't have that dependency
-  static final int DEFAULT_NUM_CHECK_PARAS = -2;  //  default number of parameters to be checked by TextLevelRules in LO/OO 
   static final int FONT_STYLE_INVALID = -1;
   static final int FONT_SIZE_INVALID = -1;
   static final int DEFAULT_COLOR_SELECTION = 0;
-  static final int DEFAULT_CHECK_DIRECT_SPEECH = CHECK_DIRECT_SPEECH_YES;
   static final int DEFAULT_THEME_SELECTION = WtGeneralTools.THEME_SYSTEM;
   static final boolean DEFAULT_DO_RESET = false;
   static final boolean DEFAULT_MULTI_THREAD = false;
   static final boolean DEFAULT_NO_BACKGROUND_CHECK = false;
-  static final boolean DEFAULT_USE_QUEUE = false;
   static final boolean DEFAULT_USE_DOC_LANGUAGE = true;
   static final boolean DEFAULT_DO_REMOTE_CHECK = false;
   static final boolean DEFAULT_USE_OTHER_SERVER = false;
@@ -85,28 +78,9 @@ public class WtConfiguration {
   static final boolean DEFAULT_USE_LT_SPELL_CHECKER = true;
   static final boolean DEFAULT_USE_LONG_MESSAGES = false;
   static final boolean DEFAULT_NO_SYNONYMS_AS_SUGGESTIONS = false;
-  static final boolean DEFAULT_INCLUDE_TRACKED_CHANGES = false;
   static final boolean DEFAULT_ENABLE_TMP_OFF_RULES = false;
   static final boolean DEFAULT_ENABLE_GOAL_SPECIFIC_RULES = false;
-  static final boolean DEFAULT_FILTER_OVERLAPPING_MATCHES = true;
-  static final boolean DEFAULT_SAVE_LO_CACHE = true;
-  static final boolean DEFAULT_USE_AI_SUPPORT = false;
-  static final boolean DEFAULT_USE_AI_IMG_SUPPORT = false;
-  static final boolean DEFAULT_USE_AI_TTS_SUPPORT = false;
-  static final boolean DEFAULT_AI_AUTO_CORRECT = true;
-  static final boolean DEFAULT_AI_AUTO_SUGGESTION = false;
-  static final int DEFAULT_AI_SHOW_STYLISTIC_CHANGES = 0;
   
-  static final String DEFAULT_AI_MODEL = "gpt-4";
-  static final String DEFAULT_AI_URL = "http://localhost:8080/v1/chat/completions/";
-  static final String DEFAULT_AI_APIKEY = "1234567";
-  static final String DEFAULT_AI_IMG_MODEL = "stablediffusion";
-  static final String DEFAULT_AI_IMG_URL = "http://localhost:8080/v1/images/generations/";
-  static final String DEFAULT_AI_IMG_APIKEY = "1234567";
-  static final String DEFAULT_AI_TTS_MODEL = "voice-de-eva_k-x-low";
-  static final String DEFAULT_AI_TTS_URL = "http://localhost:8080/tts/";
-  static final String DEFAULT_AI_TTS_APIKEY = "1234567";
-
   public static final Color GRAMMAR_COLOR_LT = new Color(255, 100, 0);
   public static final Color STYLE_COLOR_WT = new Color(0, 100, 0);
   public static final Color HINT_COLOR_WT = new Color(150, 150, 0);
@@ -135,9 +109,7 @@ public class WtConfiguration {
   private static final String SERVER_RUN_KEY = "serverMode";
   private static final String SERVER_PORT_KEY = "serverPort";
   private static final String NO_DEFAULT_CHECK_KEY = "noDefaultCheck";
-  private static final String PARA_CHECK_KEY = "numberParagraphs";
   private static final String RESET_CHECK_KEY = "doResetCheck";
-  private static final String USE_QUEUE_KEY = "useTextLevelQueue";
   private static final String NO_BACKGROUND_CHECK_KEY = "noBackgroundCheck";
   private static final String USE_DOC_LANG_KEY = "useDocumentLanguage";
   private static final String USE_GUI_KEY = "useGUIConfig";
@@ -146,7 +118,6 @@ public class WtConfiguration {
   private static final String FONT_SIZE_KEY = "font.size";
   private static final String LF_NAME_KEY = "lookAndFeelName";
   private static final String COLOR_SELECTION_KEY = "colorSelection";
-  private static final String CHECK_DIRECT_SPEACH_KEY = "checkDirectSpeech";
   private static final String THEME_SELECTION_KEY = "themeSelection";
   private static final String ERROR_COLORS_KEY = "errorColors";
   private static final String UNDERLINE_DEFAULT_COLORS_KEY = "underlineDefaultColors";
@@ -169,27 +140,9 @@ public class WtConfiguration {
   private static final String USE_LT_SPELL_CHECKER_KEY = "UseLtSpellChecker";
   private static final String USE_LONG_MESSAGES_KEY = "UseLongMessages";
   private static final String NO_SYNONYMS_AS_SUGGESTIONS_KEY = "noSynonymsAsSuggestions";
-  private static final String INCLUDE_TRACKED_CHANGES_KEY = "includeTrackedChanges";
   private static final String ENABLE_TMP_OFF_RULES_KEY = "enableTmpOffRules";
   private static final String ENABLE_GOAL_SPECIFIC_RULES_KEY = "enableGoalSpecificRules";
-  private static final String FILTER_OVERLAPPING_MATCHES_KEY = "filterOverlappingMatches";
-  private static final String SAVE_LO_CACHE_KEY = "saveLoCache";
   private static final String LT_VERSION_KEY = "ltVersion";
-  private static final String AI_URL_KEY = "aiUrl";
-  private static final String AI_APIKEY_KEY = "aiApiKey";
-  private static final String AI_MODEL_KEY = "aiModel";
-  private static final String AI_USE_AI_SUPPORT_KEY = "useAiSupport";
-  private static final String AI_AUTO_CORRECT_KEY = "aiAutoCorrect";
-  private static final String AI_AUTO_SUGGESTION_KEY = "aiAutoSuggestion";
-  private static final String AI_SHOW_STYLISTIC_CHANGES_KEY = "aiShowStylisticChangesInt";
-  private static final String AI_IMG_URL_KEY = "aiImgUrl";
-  private static final String AI_IMG_APIKEY_KEY = "aiImgApiKey";
-  private static final String AI_IMG_MODEL_KEY = "aiImgModel";
-  private static final String AI_USE_AI_IMG_SUPPORT_KEY = "useAiImgSupport";
-  private static final String AI_TTS_URL_KEY = "aiTtsUrl";
-  private static final String AI_TTS_APIKEY_KEY = "aiTtsApiKey";
-  private static final String AI_TTS_MODEL_KEY = "aiTtsModel";
-  private static final String AI_USE_AI_TTS_SUPPORT_KEY = "useAiTtsSupport";
 
   private static final String DELIMITER = ",";
   // find all comma followed by zero or more white space characters that are preceded by ":" AND a valid 6-digit hex code
@@ -246,14 +199,11 @@ public class WtConfiguration {
   private int fontStyle = FONT_STYLE_INVALID;
   private int fontSize = FONT_SIZE_INVALID;
   private int serverPort = DEFAULT_SERVER_PORT;
-  private int numParasToCheck = DEFAULT_NUM_CHECK_PARAS;
   private int colorSelection = DEFAULT_COLOR_SELECTION;
-  private int checkDirectSpeech = DEFAULT_CHECK_DIRECT_SPEECH;
   private int themeSelection = DEFAULT_THEME_SELECTION;
   private boolean doResetCheck = DEFAULT_DO_RESET;
   private boolean isMultiThreadLO = DEFAULT_MULTI_THREAD;
   private boolean noBackgroundCheck = DEFAULT_NO_BACKGROUND_CHECK;
-  private boolean useTextLevelQueue = DEFAULT_USE_QUEUE;
   private boolean useDocLanguage = DEFAULT_USE_DOC_LANGUAGE;
   private boolean doRemoteCheck = DEFAULT_DO_REMOTE_CHECK;
   private boolean useOtherServer = DEFAULT_USE_OTHER_SERVER;
@@ -262,11 +212,8 @@ public class WtConfiguration {
   private boolean useLtSpellChecker = DEFAULT_USE_LT_SPELL_CHECKER;
   private boolean useLongMessages = DEFAULT_USE_LONG_MESSAGES;
   private boolean noSynonymsAsSuggestions = DEFAULT_NO_SYNONYMS_AS_SUGGESTIONS;
-  private boolean includeTrackedChanges = DEFAULT_INCLUDE_TRACKED_CHANGES;
   private boolean enableTmpOffRules = DEFAULT_ENABLE_TMP_OFF_RULES;
   private boolean enableGoalSpecificRules = DEFAULT_ENABLE_GOAL_SPECIFIC_RULES;
-  private boolean filterOverlappingMatches = DEFAULT_FILTER_OVERLAPPING_MATCHES;
-  private boolean saveLoCache = DEFAULT_SAVE_LO_CACHE;
   private String externalRuleDirectory;
   private String lookAndFeelName;
   private String currentProfile = null;
@@ -278,21 +225,6 @@ public class WtConfiguration {
   private boolean switchOff = false;
   private boolean isOffice = false;
   private boolean isOpenOffice = false;
-  private String aiUrl = DEFAULT_AI_URL;
-  private String aiApiKey = DEFAULT_AI_APIKEY;
-  private String aiModel = DEFAULT_AI_MODEL;
-  private boolean useAiSupport = DEFAULT_USE_AI_SUPPORT;
-  private boolean aiAutoCorrect = DEFAULT_AI_AUTO_CORRECT;
-  private boolean aiAutoSuggestion = DEFAULT_AI_AUTO_SUGGESTION;
-  private int aiShowStylisticChanges = DEFAULT_AI_SHOW_STYLISTIC_CHANGES;
-  private String aiImgUrl = DEFAULT_AI_IMG_URL;
-  private String aiImgApiKey = DEFAULT_AI_IMG_APIKEY;
-  private String aiImgModel = DEFAULT_AI_IMG_MODEL;
-  private boolean useAiImgSupport = DEFAULT_USE_AI_IMG_SUPPORT;
-  private String aiTtsUrl = DEFAULT_AI_TTS_URL;
-  private String aiTtsApiKey = DEFAULT_AI_TTS_APIKEY;
-  private String aiTtsModel = DEFAULT_AI_TTS_MODEL;
-  private boolean useAiTtsSupport = DEFAULT_USE_AI_TTS_SUPPORT;
   
   /**
    * Uses the configuration file from the default location.
@@ -359,14 +291,11 @@ public class WtConfiguration {
     fontStyle = FONT_STYLE_INVALID;
     fontSize = FONT_SIZE_INVALID;
     serverPort = DEFAULT_SERVER_PORT;
-    numParasToCheck = DEFAULT_NUM_CHECK_PARAS;
     colorSelection = DEFAULT_COLOR_SELECTION;
-    checkDirectSpeech = DEFAULT_CHECK_DIRECT_SPEECH;
     themeSelection = DEFAULT_THEME_SELECTION;
     doResetCheck = DEFAULT_DO_RESET;
     isMultiThreadLO = DEFAULT_MULTI_THREAD;
     noBackgroundCheck = DEFAULT_NO_BACKGROUND_CHECK;
-    useTextLevelQueue = DEFAULT_USE_QUEUE;
     useDocLanguage = DEFAULT_USE_DOC_LANGUAGE;
     doRemoteCheck = DEFAULT_DO_REMOTE_CHECK;
     useOtherServer = DEFAULT_USE_OTHER_SERVER;
@@ -375,26 +304,8 @@ public class WtConfiguration {
     useLtSpellChecker = DEFAULT_USE_LT_SPELL_CHECKER;
     useLongMessages = DEFAULT_USE_LONG_MESSAGES;
     noSynonymsAsSuggestions = DEFAULT_NO_SYNONYMS_AS_SUGGESTIONS;
-    includeTrackedChanges = DEFAULT_INCLUDE_TRACKED_CHANGES;
     enableTmpOffRules = DEFAULT_ENABLE_TMP_OFF_RULES;
     enableGoalSpecificRules = DEFAULT_ENABLE_GOAL_SPECIFIC_RULES;
-    filterOverlappingMatches = DEFAULT_FILTER_OVERLAPPING_MATCHES;
-    saveLoCache = DEFAULT_SAVE_LO_CACHE;
-    aiUrl = DEFAULT_AI_URL;
-    aiApiKey = DEFAULT_AI_APIKEY;
-    aiModel = DEFAULT_AI_MODEL;
-    useAiSupport = DEFAULT_USE_AI_SUPPORT;
-    aiAutoCorrect = DEFAULT_AI_AUTO_CORRECT;
-    aiAutoSuggestion = DEFAULT_AI_AUTO_SUGGESTION;
-    aiShowStylisticChanges = DEFAULT_AI_SHOW_STYLISTIC_CHANGES;
-    aiImgUrl = DEFAULT_AI_IMG_URL;
-    aiImgApiKey = DEFAULT_AI_IMG_APIKEY;
-    aiImgModel = DEFAULT_AI_IMG_MODEL;
-    useAiImgSupport = DEFAULT_USE_AI_IMG_SUPPORT;
-    aiTtsUrl = DEFAULT_AI_TTS_URL;
-    aiTtsApiKey = DEFAULT_AI_TTS_APIKEY;
-    aiTtsModel = DEFAULT_AI_TTS_MODEL;
-    useAiTtsSupport = DEFAULT_USE_AI_TTS_SUPPORT;
     externalRuleDirectory = null;
     lookAndFeelName = null;
     currentProfile = null;
@@ -435,12 +346,9 @@ public class WtConfiguration {
     this.fontStyle = configuration.fontStyle;
     this.fontSize = configuration.fontSize;
     this.serverPort = configuration.serverPort;
-    this.numParasToCheck = configuration.numParasToCheck;
     this.colorSelection = configuration.colorSelection;
-    this.checkDirectSpeech = configuration.checkDirectSpeech;
     this.themeSelection = configuration.themeSelection;
     this.doResetCheck = configuration.doResetCheck;
-    this.useTextLevelQueue = configuration.useTextLevelQueue;
     this.noBackgroundCheck = configuration.noBackgroundCheck;
     this.isMultiThreadLO = configuration.isMultiThreadLO;
     this.useDocLanguage = configuration.useDocLanguage;
@@ -454,11 +362,8 @@ public class WtConfiguration {
     this.useLtSpellChecker = configuration.useLtSpellChecker;
     this.useLongMessages = configuration.useLongMessages;
     this.noSynonymsAsSuggestions = configuration.noSynonymsAsSuggestions;
-    this.includeTrackedChanges = configuration.includeTrackedChanges;
     this.enableTmpOffRules = configuration.enableTmpOffRules;
     this.enableGoalSpecificRules = configuration.enableGoalSpecificRules;
-    this.filterOverlappingMatches = configuration.filterOverlappingMatches;
-    this.saveLoCache = configuration.saveLoCache;
     this.otherServerUrl = configuration.otherServerUrl;
     this.remoteUsername = configuration.remoteUsername;
     this.remoteApiKey = configuration.remoteApiKey;
@@ -466,21 +371,6 @@ public class WtConfiguration {
     this.isOffice = configuration.isOffice;
     this.isOpenOffice = configuration.isOpenOffice;
     this.ltVersion = configuration.ltVersion;
-    this.aiUrl = configuration.aiUrl;
-    this.aiApiKey = configuration.aiApiKey;
-    this.aiModel = configuration.aiModel;
-    this.useAiSupport = configuration.useAiSupport;
-    this.aiAutoCorrect = configuration.aiAutoCorrect;
-    this.aiAutoSuggestion = configuration.aiAutoSuggestion;
-    this.aiShowStylisticChanges = configuration.aiShowStylisticChanges;
-    this.aiImgUrl = configuration.aiImgUrl;
-    this.aiImgApiKey = configuration.aiImgApiKey;
-    this.aiImgModel = configuration.aiImgModel;
-    this.useAiImgSupport = configuration.useAiImgSupport;
-    this.aiTtsUrl = configuration.aiTtsUrl;
-    this.aiTtsApiKey = configuration.aiTtsApiKey;
-    this.aiTtsModel = configuration.aiTtsModel;
-    this.useAiTtsSupport = configuration.useAiTtsSupport;
     
     this.disabledRuleIds.clear();
     this.disabledRuleIds.addAll(configuration.disabledRuleIds);
@@ -692,126 +582,6 @@ public class WtConfiguration {
     this.remoteApiKey = remoteApiKey;
   }
 
-  public String aiUrl() {
-    return aiUrl;
-  }
-
-  public void setAiUrl(String aiUrl) {
-    this.aiUrl = aiUrl;
-  }
-
-  public String aiModel() {
-    return aiModel;
-  }
-
-  public void setAiModel(String aiModel) {
-    this.aiModel = aiModel;
-  }
-
-  public String aiApiKey() {
-    return aiApiKey;
-  }
-
-  public void setAiApiKey(String aiApiKey) {
-    this.aiApiKey = aiApiKey;
-  }
-
-  public boolean useAiSupport() {
-    return useAiSupport;
-  }
-
-  public void setUseAiSupport(boolean useAiSupport) {
-    this.useAiSupport = useAiSupport;
-  }
-
-  public boolean aiAutoCorrect() {
-    return aiAutoCorrect;
-  }
-
-  public void setAiAutoCorrect(boolean aiAutoCorrect) {
-    this.aiAutoCorrect = aiAutoCorrect;
-  }
-
-  public boolean aiAutoSuggestion() {
-    return aiAutoSuggestion;
-  }
-
-  public void setAiAutoSuggestion(boolean aiAutoSuggestion) {
-    this.aiAutoSuggestion = aiAutoSuggestion;
-  }
-
-  public int aiShowStylisticChanges() {
-    return aiShowStylisticChanges;
-  }
-
-  public void setAiShowStylisticChanges(int aiShowStylisticChanges) {
-    this.aiShowStylisticChanges = aiShowStylisticChanges;
-  }
-
-  public String aiImgUrl() {
-    return aiImgUrl;
-  }
-
-  public void setAiImgUrl(String aiImgUrl) {
-    this.aiImgUrl = aiImgUrl;
-  }
-
-  public String aiImgModel() {
-    return aiImgModel;
-  }
-
-  public void setAiImgModel(String aiImgModel) {
-    this.aiImgModel = aiImgModel;
-  }
-
-  public String aiImgApiKey() {
-    return aiImgApiKey;
-  }
-
-  public void setAiImgApiKey(String aiImgApiKey) {
-    this.aiImgApiKey = aiImgApiKey;
-  }
-
-  public boolean useAiImgSupport() {
-    return useAiImgSupport;
-  }
-
-  public void setUseAiImgSupport(boolean useAiImgSupport) {
-    this.useAiImgSupport = useAiImgSupport;
-  }
-
-  public String aiTtsUrl() {
-    return aiTtsUrl;
-  }
-
-  public void setAiTtsUrl(String aiTtsUrl) {
-    this.aiTtsUrl = aiTtsUrl;
-  }
-
-  public String aiTtsModel() {
-    return aiTtsModel;
-  }
-
-  public void setAiTtsModel(String aiTtsModel) {
-    this.aiTtsModel = aiTtsModel;
-  }
-
-  public String aiTtsApiKey() {
-    return aiTtsApiKey;
-  }
-
-  public void setAiTtsApiKey(String aiTtsApiKey) {
-    this.aiTtsApiKey = aiTtsApiKey;
-  }
-
-  public boolean useAiTtsSupport() {
-    return useAiTtsSupport;
-  }
-
-  public void setUseAiTtsSupport(boolean useAiTtsSupport) {
-    this.useAiTtsSupport = useAiTtsSupport;
-  }
-
   public String getRemoteApiKey() {
     return isPremium ? remoteApiKey : null;
   }
@@ -852,14 +622,6 @@ public class WtConfiguration {
     return noSynonymsAsSuggestions;
   }
   
-  public void setIncludeTrackedChanges(boolean includeTrackedChanges) {
-    this.includeTrackedChanges = includeTrackedChanges;
-  }
-
-  public boolean includeTrackedChanges() {
-    return includeTrackedChanges;
-  }
-  
   public void setEnableTmpOffRules(boolean enableTmpOffRules) {
     this.enableTmpOffRules = enableTmpOffRules;
   }
@@ -875,23 +637,7 @@ public class WtConfiguration {
   public boolean enableGoalSpecificRules() {
     return enableGoalSpecificRules;
   }
-  
-  public void setFilterOverlappingMatches(boolean filterOverlappingMatches) {
-    this.filterOverlappingMatches = filterOverlappingMatches;
-  }
 
-  public boolean filterOverlappingMatches() {
-    return filterOverlappingMatches;
-  }
-  
-  public void setSaveLoCache(boolean saveLoCache) {
-    this.saveLoCache = saveLoCache;
-  }
-
-  public boolean saveLoCache() {
-    return saveLoCache;
-  }
-  
   /**
    * Determines whether the tagger window will also print the disambiguation
    * log.
@@ -946,22 +692,6 @@ public class WtConfiguration {
   }
 
   /**
-   * get the number of paragraphs to be checked for TextLevelRules
-   * @since LT4.0
-   */
-  public int getNumParasToCheck() {
-    return numParasToCheck;
-  }
-
-  /**
-   * set the number of paragraphs to be checked for TextLevelRules
-   * @since LT4.0
-   */
-  public void setNumParasToCheck(int numParas) {
-    this.numParasToCheck = numParas;
-  }
-
-  /**
    * get the color model selected
    * @since WT 1.0
    */
@@ -975,22 +705,6 @@ public class WtConfiguration {
    */
   public void setColorSelection(int colorSelection) {
     this.colorSelection = colorSelection;
-  }
-
-  /**
-   * get the option to check the text inside direct speech or not
-   * @since  1.2
-   */
-  public int getCheckDirectSpeech() {
-    return checkDirectSpeech;
-  }
-
-  /**
-   * get the option to check the text inside direct speech or not
-   * @since  1.2
-   */
-  public void setCheckDirectSpeech(int checkDirectSpeech) {
-    this.checkDirectSpeech = checkDirectSpeech;
   }
 
   /**
@@ -1023,24 +737,6 @@ public class WtConfiguration {
    */
   public void setDoResetCheck(boolean resetCheck) {
     this.doResetCheck = resetCheck;
-  }
-
-  /**
-   * will all paragraphs not checked after every change of text 
-   * if more than one document loaded?
-   * @since LT4.5
-   */
-  public boolean useTextLevelQueue() {
-    return useTextLevelQueue;
-  }
-
-  /**
-   * set all paragraphs to be not checked after every change of text
-   * if more than one document loaded?
-   * @since LT4.5
-   */
-  public void setUseTextLevelQueue(boolean useTextLevelQueue) {
-    this.useTextLevelQueue = useTextLevelQueue;
   }
 
   /**
@@ -1705,22 +1401,9 @@ public class WtConfiguration {
       externalRuleDirectory = extRules;
     }
 
-    String paraCheckString = (String) props.get(prefix + NO_DEFAULT_CHECK_KEY);
-    if (Boolean.parseBoolean(paraCheckString)) {
-      paraCheckString = (String) props.get(prefix + PARA_CHECK_KEY);
-      if (paraCheckString != null) {
-        numParasToCheck = Integer.parseInt(paraCheckString);
-      }
-    }
-
     String colorSelectionString = (String) props.get(prefix + COLOR_SELECTION_KEY);
     if (colorSelectionString != null) {
       colorSelection = Integer.parseInt(colorSelectionString);
-    }
-
-    String checkDirectSpeechString = (String) props.get(prefix + CHECK_DIRECT_SPEACH_KEY);
-    if (checkDirectSpeechString != null) {
-      checkDirectSpeech = Integer.parseInt(checkDirectSpeechString);
     }
 
     String themeSelectionString = (String) props.get(prefix + THEME_SELECTION_KEY);
@@ -1731,11 +1414,6 @@ public class WtConfiguration {
     String resetCheckString = (String) props.get(prefix + RESET_CHECK_KEY);
     if (resetCheckString != null) {
       doResetCheck = Boolean.parseBoolean(resetCheckString);
-    }
-
-    String useTextLevelQueueString = (String) props.get(prefix + USE_QUEUE_KEY);
-    if (useTextLevelQueueString != null) {
-      useTextLevelQueue = Boolean.parseBoolean(useTextLevelQueueString);
     }
 
     String noBackgroundCheckString = (String) props.get(prefix + NO_BACKGROUND_CHECK_KEY);
@@ -1797,11 +1475,6 @@ public class WtConfiguration {
       noSynonymsAsSuggestions = Boolean.parseBoolean(noSynonymsAsSuggestionsString);
     }
     
-    String includeTrackedChangesString = (String) props.get(prefix + INCLUDE_TRACKED_CHANGES_KEY);
-    if (includeTrackedChangesString != null) {
-      includeTrackedChanges = Boolean.parseBoolean(includeTrackedChangesString);
-    }
-    
     String enableTmpOffRulesString = (String) props.get(prefix + ENABLE_TMP_OFF_RULES_KEY);
     if (enableTmpOffRulesString != null) {
       enableTmpOffRules = Boolean.parseBoolean(enableTmpOffRulesString);
@@ -1810,92 +1483,6 @@ public class WtConfiguration {
     String enableGoalSpecificRulesString = (String) props.get(prefix + ENABLE_GOAL_SPECIFIC_RULES_KEY);
     if (enableGoalSpecificRulesString != null) {
       enableGoalSpecificRules = Boolean.parseBoolean(enableGoalSpecificRulesString);
-    }
-    
-    String filterOverlappingMatchesString = (String) props.get(prefix + FILTER_OVERLAPPING_MATCHES_KEY);
-    if (filterOverlappingMatchesString != null) {
-      filterOverlappingMatches = Boolean.parseBoolean(filterOverlappingMatchesString);
-    }
-    
-    String saveLoCacheString = (String) props.get(prefix + SAVE_LO_CACHE_KEY);
-    if (saveLoCacheString != null) {
-      saveLoCache = Boolean.parseBoolean(saveLoCacheString);
-    }
-    
-    String aiString = (String) props.get(prefix + AI_URL_KEY);
-    if (aiString != null) {
-      aiUrl = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_MODEL_KEY);
-    if (aiString != null) {
-      aiModel = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_APIKEY_KEY);
-    if (aiString != null) {
-      aiApiKey = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_USE_AI_SUPPORT_KEY);
-    if (aiString != null) {
-      useAiSupport = Boolean.parseBoolean(aiString);
-    }
-    
-    aiString = (String) props.get(prefix + AI_AUTO_CORRECT_KEY);
-    if (aiString != null) {
-      aiAutoCorrect = Boolean.parseBoolean(aiString);
-    }
-    
-    aiString = (String) props.get(prefix + AI_AUTO_SUGGESTION_KEY);
-    if (aiString != null) {
-      aiAutoSuggestion = Boolean.parseBoolean(aiString);
-    }
-    
-    aiString = (String) props.get(prefix + AI_SHOW_STYLISTIC_CHANGES_KEY);
-    if (aiString != null) {
-      aiShowStylisticChanges = Integer.parseInt(aiString);
-    }
-    
-    
-    aiString = (String) props.get(prefix + AI_IMG_URL_KEY);
-    if (aiString != null) {
-      aiImgUrl = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_IMG_MODEL_KEY);
-    if (aiString != null) {
-      aiImgModel = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_IMG_APIKEY_KEY);
-    if (aiString != null) {
-      aiImgApiKey = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_USE_AI_IMG_SUPPORT_KEY);
-    if (aiString != null) {
-      useAiImgSupport = Boolean.parseBoolean(aiString);
-    }
-    
-    aiString = (String) props.get(prefix + AI_TTS_URL_KEY);
-    if (aiString != null) {
-      aiTtsUrl = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_TTS_MODEL_KEY);
-    if (aiString != null) {
-      aiTtsModel = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_TTS_APIKEY_KEY);
-    if (aiString != null) {
-      aiTtsApiKey = aiString;
-    }
-    
-    aiString = (String) props.get(prefix + AI_USE_AI_TTS_SUPPORT_KEY);
-    if (aiString != null) {
-      useAiTtsSupport = Boolean.parseBoolean(aiString);
     }
     
     String rulesValuesString = (String) props.get(prefix + CONFIGURABLE_RULE_VALUES_KEY + qualifier);
@@ -2120,12 +1707,9 @@ public class WtConfiguration {
     allProfileKeys.add(SERVER_RUN_KEY);
     allProfileKeys.add(SERVER_PORT_KEY);
     allProfileKeys.add(NO_DEFAULT_CHECK_KEY);
-    allProfileKeys.add(PARA_CHECK_KEY);
     allProfileKeys.add(COLOR_SELECTION_KEY);
-    allProfileKeys.add(CHECK_DIRECT_SPEACH_KEY);
     allProfileKeys.add(THEME_SELECTION_KEY);
     allProfileKeys.add(RESET_CHECK_KEY);
-    allProfileKeys.add(USE_QUEUE_KEY);
     allProfileKeys.add(NO_BACKGROUND_CHECK_KEY);
     allProfileKeys.add(USE_DOC_LANG_KEY);
     allProfileKeys.add(USE_GUI_KEY);
@@ -2152,26 +1736,8 @@ public class WtConfiguration {
     allProfileKeys.add(USE_LT_SPELL_CHECKER_KEY);
     allProfileKeys.add(USE_LONG_MESSAGES_KEY);
     allProfileKeys.add(NO_SYNONYMS_AS_SUGGESTIONS_KEY);
-    allProfileKeys.add(INCLUDE_TRACKED_CHANGES_KEY);
     allProfileKeys.add(ENABLE_TMP_OFF_RULES_KEY);
     allProfileKeys.add(ENABLE_GOAL_SPECIFIC_RULES_KEY);
-    allProfileKeys.add(FILTER_OVERLAPPING_MATCHES_KEY);
-    allProfileKeys.add(SAVE_LO_CACHE_KEY);
-    allProfileKeys.add(AI_URL_KEY);
-    allProfileKeys.add(AI_APIKEY_KEY);
-    allProfileKeys.add(AI_MODEL_KEY);
-    allProfileKeys.add(AI_USE_AI_SUPPORT_KEY);
-    allProfileKeys.add(AI_AUTO_CORRECT_KEY);
-    allProfileKeys.add(AI_AUTO_SUGGESTION_KEY);
-    allProfileKeys.add(AI_SHOW_STYLISTIC_CHANGES_KEY);
-    allProfileKeys.add(AI_IMG_URL_KEY);
-    allProfileKeys.add(AI_IMG_APIKEY_KEY);
-    allProfileKeys.add(AI_IMG_MODEL_KEY);
-    allProfileKeys.add(AI_USE_AI_IMG_SUPPORT_KEY);
-    allProfileKeys.add(AI_TTS_URL_KEY);
-    allProfileKeys.add(AI_TTS_APIKEY_KEY);
-    allProfileKeys.add(AI_TTS_MODEL_KEY);
-    allProfileKeys.add(AI_USE_AI_TTS_SUPPORT_KEY);
 
     allProfileLangKeys.add(DISABLED_RULES_KEY);
     allProfileLangKeys.add(ENABLED_RULES_KEY);
@@ -2239,24 +1805,14 @@ public class WtConfiguration {
     props.setProperty(prefix + USE_GUI_KEY, Boolean.toString(guiConfig));
     props.setProperty(prefix + SERVER_RUN_KEY, Boolean.toString(runServer));
     props.setProperty(prefix + SERVER_PORT_KEY, Integer.toString(serverPort));
-    if (numParasToCheck != DEFAULT_NUM_CHECK_PARAS) {
-      props.setProperty(prefix + NO_DEFAULT_CHECK_KEY, Boolean.toString(true));
-      props.setProperty(prefix + PARA_CHECK_KEY, Integer.toString(numParasToCheck));
-    }
     if (colorSelection != DEFAULT_COLOR_SELECTION) {
       props.setProperty(prefix + COLOR_SELECTION_KEY, Integer.toString(colorSelection));
-    }
-    if (checkDirectSpeech != DEFAULT_CHECK_DIRECT_SPEECH) {
-      props.setProperty(prefix + CHECK_DIRECT_SPEACH_KEY, Integer.toString(checkDirectSpeech));
     }
     if (themeSelection != DEFAULT_THEME_SELECTION) {
       props.setProperty(prefix + THEME_SELECTION_KEY, Integer.toString(themeSelection));
     }
     if (doResetCheck != DEFAULT_DO_RESET) {
       props.setProperty(prefix + RESET_CHECK_KEY, Boolean.toString(doResetCheck));
-    }
-    if (useTextLevelQueue != DEFAULT_USE_QUEUE) {
-      props.setProperty(prefix + USE_QUEUE_KEY, Boolean.toString(useTextLevelQueue));
     }
     if (noBackgroundCheck != DEFAULT_NO_BACKGROUND_CHECK) {
       props.setProperty(prefix + NO_BACKGROUND_CHECK_KEY, Boolean.toString(noBackgroundCheck));
@@ -2288,20 +1844,11 @@ public class WtConfiguration {
     if (noSynonymsAsSuggestions != DEFAULT_NO_SYNONYMS_AS_SUGGESTIONS) {
       props.setProperty(prefix + NO_SYNONYMS_AS_SUGGESTIONS_KEY, Boolean.toString(noSynonymsAsSuggestions));
     }
-    if (includeTrackedChanges != DEFAULT_INCLUDE_TRACKED_CHANGES) {
-      props.setProperty(prefix + INCLUDE_TRACKED_CHANGES_KEY, Boolean.toString(includeTrackedChanges));
-    }
     if (enableTmpOffRules != DEFAULT_ENABLE_TMP_OFF_RULES) {
       props.setProperty(prefix + ENABLE_TMP_OFF_RULES_KEY, Boolean.toString(enableTmpOffRules));
     }
     if (enableGoalSpecificRules != DEFAULT_ENABLE_GOAL_SPECIFIC_RULES) {
       props.setProperty(prefix + ENABLE_GOAL_SPECIFIC_RULES_KEY, Boolean.toString(enableGoalSpecificRules));
-    }
-    if (filterOverlappingMatches != DEFAULT_FILTER_OVERLAPPING_MATCHES) {
-      props.setProperty(prefix + FILTER_OVERLAPPING_MATCHES_KEY, Boolean.toString(filterOverlappingMatches));
-    }
-    if (saveLoCache != DEFAULT_SAVE_LO_CACHE) {
-      props.setProperty(prefix + SAVE_LO_CACHE_KEY, Boolean.toString(saveLoCache));
     }
     if (switchOff) {
       props.setProperty(prefix + LT_SWITCHED_OFF_KEY, Boolean.toString(switchOff));
@@ -2314,51 +1861,6 @@ public class WtConfiguration {
     }
     if (remoteApiKey != null) {
       props.setProperty(prefix + REMOTE_APIKEY_KEY, remoteApiKey);
-    }
-    if (aiUrl != null) {
-      props.setProperty(prefix + AI_URL_KEY, aiUrl);
-    }
-    if (aiModel != null) {
-      props.setProperty(prefix + AI_MODEL_KEY, aiModel);
-    }
-    if (aiApiKey != null) {
-      props.setProperty(prefix + AI_APIKEY_KEY, aiApiKey);
-    }
-    if (useAiSupport != DEFAULT_USE_AI_SUPPORT) {
-      props.setProperty(prefix + AI_USE_AI_SUPPORT_KEY, Boolean.toString(useAiSupport));
-    }
-    if (aiAutoCorrect != DEFAULT_AI_AUTO_CORRECT) {
-      props.setProperty(prefix + AI_AUTO_CORRECT_KEY, Boolean.toString(aiAutoCorrect));
-    }
-    if (aiAutoSuggestion != DEFAULT_AI_AUTO_SUGGESTION) {
-      props.setProperty(prefix + AI_AUTO_SUGGESTION_KEY, Boolean.toString(aiAutoSuggestion));
-    }
-    if (this.aiShowStylisticChanges != DEFAULT_AI_SHOW_STYLISTIC_CHANGES) {
-      props.setProperty(prefix + AI_SHOW_STYLISTIC_CHANGES_KEY, Integer.toString(aiShowStylisticChanges));
-    }
-    if (aiImgUrl != null) {
-      props.setProperty(prefix + AI_IMG_URL_KEY, aiImgUrl);
-    }
-    if (aiImgModel != null) {
-      props.setProperty(prefix + AI_IMG_MODEL_KEY, aiImgModel);
-    }
-    if (aiImgApiKey != null) {
-      props.setProperty(prefix + AI_IMG_APIKEY_KEY, aiImgApiKey);
-    }
-    if (useAiImgSupport != DEFAULT_USE_AI_IMG_SUPPORT) {
-      props.setProperty(prefix + AI_USE_AI_IMG_SUPPORT_KEY, Boolean.toString(useAiImgSupport));
-    }
-    if (aiTtsUrl != null) {
-      props.setProperty(prefix + AI_TTS_URL_KEY, aiTtsUrl);
-    }
-    if (aiTtsModel != null) {
-      props.setProperty(prefix + AI_TTS_MODEL_KEY, aiTtsModel);
-    }
-    if (aiTtsApiKey != null) {
-      props.setProperty(prefix + AI_TTS_APIKEY_KEY, aiTtsApiKey);
-    }
-    if (useAiTtsSupport != DEFAULT_USE_AI_TTS_SUPPORT) {
-      props.setProperty(prefix + AI_USE_AI_TTS_SUPPORT_KEY, Boolean.toString(useAiTtsSupport));
     }
     if (fontName != null) {
       props.setProperty(prefix + FONT_NAME_KEY, fontName);
