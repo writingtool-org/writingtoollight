@@ -1,4 +1,4 @@
-# WritingToolLight (a LibreOffice Extension based on LanguageTool) 
+# WritingToolLight (a OpenOffice Extension based on LanguageTool) 
 
 ***NOTE: WritingToolLight requires Java 17 or higher now***
 
